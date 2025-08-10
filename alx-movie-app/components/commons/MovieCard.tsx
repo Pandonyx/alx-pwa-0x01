@@ -1,27 +1,18 @@
-import React from 'react'
-import Image from 'next/image'
+import { MovieProps } from "@/interfaces"
+import Image from "next/image"
 
-export type MovieCardProps = {
-  id?: string
-  title: string
-  year?: number
-  posterUrl?: string
-  onClick?: () => void
-}
-
-const MovieCard: React.FC<MovieCardProps> = ({ title, year, posterUrl, onClick }) => {
+const MovieCard: React.FC<MovieProps> = ({ title, posterImage, releaseYear }) => {
   return (
-    <article onClick={onClick} className="group cursor-pointer rounded-2xl border p-3 shadow-sm hover:shadow-md">
-      <div className="relative mb-3 aspect-[2/3] w-full overflow-hidden rounded-xl bg-gray-100">
-        {posterUrl ? (
-          <Image src={posterUrl} alt={`${title} poster`} fill sizes="(max-width:768px) 50vw, 200px" className="object-cover" />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-gray-400">No Image</div>
-        )}
+    <div className="h-[563px]">
+      <div>
+        <Image className="h-[430px] w-full rounded-md hover:cursor-pointer" src={posterImage} width={100} height={100} alt={title} />
+
       </div>
-      <h3 className="text-base font-semibold leading-tight line-clamp-2">{title}</h3>
-      {year ? <p className="text-sm text-gray-500">{year}</p> : null}
-    </article>
+      <div className="flex justify-between py-4">
+        <p className="text-xl font-bold">{title}</p>
+        <p className="text-xl text-[#E2D609]">{releaseYear}</p>
+      </div>
+    </div>
   )
 }
 
